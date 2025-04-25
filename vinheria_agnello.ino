@@ -9,6 +9,9 @@ const int LED_AMARELO = 5;
 const int LED_VERMELHO = 6;
 const int BUZZER = 7;
 const int LDR = A0;
+int pegarLuz = 0;
+int mediaLuz = 0;
+int contMedia = 0;
 
 // Controle de buzzer
 unsigned long tempoAlarme = 0;
@@ -135,6 +138,7 @@ void loop() {
     buzzerTocando = false;
     jaSoouNaZonaVermelha = false;
     mostrarTextoComFolha("OK", porcentagem);
+    pegarLuz = porcentagem;
   } 
   else if (porcentagem > 30 && porcentagem <= 50) {
     Serial.println("Status: Alerta (LED AMARELO)");
@@ -145,6 +149,7 @@ void loop() {
     buzzerTocando = false;
     jaSoouNaZonaVermelha = false;
     mostrarTextoComFolha("Alerta", porcentagem);
+    pegarLuz = porcentagem;
   } 
   else {
     Serial.println("Status: Perigo (LED VERMELHO + BUZZER UMA VEZ)");
@@ -157,6 +162,7 @@ void loop() {
       tempoAlarme = millis();
       buzzerTocando = true;
       jaSoouNaZonaVermelha = true;
+      pegarLuz = porcentagem;
     }
 
     if (buzzerTocando && millis() - tempoAlarme >= 3000) {
@@ -167,6 +173,17 @@ void loop() {
     mostrarTextoComFolha("Perigo", porcentagem);
   }
 
-  delay(2000);
+  mediaLuz = mediaLuz + pegarLuz;
+  contMedia++;
+  delay(1000);
+  if (contMedia == 10){
+    mediaLuz = mediaLuz / 10;
+    Serial.print("Sua média de porcentagens é: ");
+    Serial.print(mediaLuz);
+    Serial.println("%");
+    mediaLuz = 0;
+    contMedia = 0;
+    pegarLuz= 0;
+    delay(600);
+  }
 }
-
