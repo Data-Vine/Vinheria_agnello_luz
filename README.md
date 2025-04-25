@@ -77,7 +77,7 @@ O código completo está disponível no arquivo `vinheria_agnello.ino`.
 ## Testando o Projeto
 1. Carregue o código no Arduino.
 2. Conecte os componentes conforme o esquema de montagem.
-3. Para simulação, acesse o [Wokwi](https://wokwi.com/).
+3. Para simulação, acesse o [Wokwi](https://wokwi.com/) Ou diretamente o projeto [Wokwi](https://wokwi.com/projects/429218607912979457)
 4. Varie a luminosidade cobrindo ou iluminando o LDR.
 5. Observe as mudanças nos LEDs, mensagens no LCD e o acionamento do buzzer.
 6. Pressione o botão para incrementar o contador.
